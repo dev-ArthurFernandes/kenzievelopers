@@ -8,7 +8,7 @@ CREATE TABLE developers(
 
 CREATE TABLE developer_infos(
     "id" SERIAL PRIMARY KEY,
-    "developerSince" DATE NOt NULL,
+    "developerSince" DATE NOT NULL,
     "preferredOS" OS NOT NULL,
     "developerId" INTEGER NOT NULL UNIQUE,
     FOREIGN KEY ("developerId") REFERENCES "developers" ("id") ON DELETE CASCADE
