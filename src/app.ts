@@ -15,7 +15,8 @@ import {
     getProjects,
     updateDeveloper,
     patchProject,
-    deleteProject
+    deleteProject,
+    addProjectTechnologie
 } from "./logic";
 
 const app: Application = express();
@@ -35,11 +36,14 @@ app.delete('/developers/:id', validateId, deleteDeveloper)
 
 // projects
 app.post('/projects', verifyDeveloper, createProject)
+app.post('/projects/:id/technologies', validateId, addProjectTechnologie)
 
 app.get('/projects/:id', validateId, getProjects)
 
 app.patch('/projects/:id', validateId, verifyDeveloper, patchProject)
 
 app.delete('/projects/:id', validateId, deleteProject)
-export default app;
 
+
+
+export default app;

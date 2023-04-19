@@ -19,7 +19,7 @@ const addProjectTechnologie =async (req:Request, res: Response): Promise<Respons
             tech.name = $1 
     `
 
-    const queryConfig: QueryConfig = {
+    var queryConfig: QueryConfig = {
         text: queryString,
         values: [techName]
     }
@@ -29,21 +29,30 @@ const addProjectTechnologie =async (req:Request, res: Response): Promise<Respons
     queryString = format(`
         INSERT INTO
             projects_technologies(%I)
-        VALUES(%L)
-        RETURNING
-            "id",
-            "name"
-        LEFT JOIN
-            project proj
-                ON proj.id = %n;
+        VALUES(%L);
     `,
-        ["addedIn","TechnologyId","ProjectId"],
-        [Date(), techId, projectId]
+        ["addedIn","technologyId","projectId"],
+        [new Date(), techId, projectId]
     )
 
-    const queryResult = (await client.query(queryString)).rows[0]
+    await client.query(queryString)
 
-    return res.json(queryResult)
+    queryString = `
+        SELECT
+            *
+        FROM 
+            projects
+        WHERE
+            id = ${projectId}
+    `
+
+    const project = (await client.query(queryString)).rows[0]
+
+    return res.json({
+        "tehcnologyId": techId,
+        "technologyName": techName,
+        ...project
+    })
 }
 
 export default addProjectTechnologie
