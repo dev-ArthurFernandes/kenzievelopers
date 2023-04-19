@@ -13,7 +13,8 @@ import {
     deleteDeveloper,
     getDeveloper,
     getProjects,
-    updateDeveloper
+    updateDeveloper,
+    patchProject
 } from "./logic";
 
 const app: Application = express();
@@ -35,5 +36,7 @@ app.delete('/developers/:id', validateId, deleteDeveloper)
 app.post('/projects', verifyDeveloper, createProject)
 
 app.get('/projects/:id', validateId, getProjects)
+
+app.patch('/projects/:id', validateId, verifyDeveloper, patchProject)
 export default app;
 

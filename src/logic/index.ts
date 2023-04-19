@@ -7,6 +7,7 @@ import deleteDeveloper from "./deleteDeveloper.logic";
 import createProject from "./createProject.logic";
 import addProjectTechnologie from "./addProjectTechnologies.logic";
 import getProjects from "./getProjects.logic";
+import patchProject from "./patchProjects.logic";
 
 export {
     createDeveloper,
@@ -16,5 +17,6 @@ export {
     deleteDeveloper,
     createProject,
     addProjectTechnologie,
-    getProjects
+    getProjects,
+    patchProject
 }
