@@ -12,6 +12,7 @@ import {
     createProject,
     deleteDeveloper,
     getDeveloper,
+    getProjects,
     updateDeveloper
 } from "./logic";
 
@@ -29,7 +30,10 @@ app.patch('/developers/:id', validateId, validateEmail, updateDeveloper)
 
 app.delete('/developers/:id', validateId, deleteDeveloper)
 
+
 // projects
 app.post('/projects', verifyDeveloper, createProject)
+
+app.get('/projects/:id', validateId, getProjects)
 export default app;
 
