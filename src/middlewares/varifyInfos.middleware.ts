@@ -13,7 +13,7 @@ const verifyInfos =async (req:Request, res: Response, next: NextFunction): Promi
         FROM
             developer_infos devInfo
         WHERE
-            devInfo.developerId = $1;
+            devInfo."developerId" = $1;
     `
 
     const queryConfig: QueryConfig = {
@@ -23,7 +23,7 @@ const verifyInfos =async (req:Request, res: Response, next: NextFunction): Promi
 
     const queryResult: boolean = (await client.query(queryConfig)).rowCount? true : false
 
-    if(queryResult){
+    if(!queryResult){
         return next()
     }
 

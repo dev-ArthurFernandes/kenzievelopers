@@ -3,11 +3,13 @@ import "dotenv/config";
 import { 
     validateEmail,
     validateId,
-    verifyInfos
+    verifyInfos,
+    verifyDeveloper
 } from "./middlewares";
 import {
     createDeveloper,
     createDeveloperInfo,
+    createProject,
     deleteDeveloper,
     getDeveloper,
     updateDeveloper
@@ -27,4 +29,7 @@ app.patch('/developers/:id', validateId, validateEmail, updateDeveloper)
 
 app.delete('/developers/:id', validateId, deleteDeveloper)
 
+// projects
+app.post('/projects', verifyDeveloper, createProject)
 export default app;
+
