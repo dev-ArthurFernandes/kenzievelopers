@@ -3,7 +3,7 @@ import { client } from "../database";
 import { technologies } from "../interfaces/projects.interfaces";
 
 
-const ensureTech =async (req:Request, res: Response, next: NextFunction): Promise<void | Response> => {
+const ensureTech = async (req:Request, res: Response, next: NextFunction): Promise<void | Response> => {
     
     const tech: string = req.body.name || req.params.name
 

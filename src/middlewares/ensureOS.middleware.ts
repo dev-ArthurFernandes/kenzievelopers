@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 
-const ensuerOS =async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+const ensuerOS = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     
     const OS = req.body.preferredOS
 

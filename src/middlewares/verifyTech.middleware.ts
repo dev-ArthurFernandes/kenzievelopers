@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { client } from "../database";
 
 
-const verifyTech =async (req:Request, res: Response, next: NextFunction): Promise<void | Response> => {
+const verifyTech = async (req:Request, res: Response, next: NextFunction): Promise<void | Response> => {
 
     const projetcId: number = parseInt(req.params.id)
 

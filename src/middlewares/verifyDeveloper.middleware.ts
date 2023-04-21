@@ -5,7 +5,7 @@ import { IProjectRequest } from "../interfaces/projects.interfaces";
 import { QueryConfig } from "pg";
 
 
-const verifyDeveloper =async (req:Request, res: Response, next: NextFunction): Promise<Response | void> => {
+const verifyDeveloper = async (req:Request, res: Response, next: NextFunction): Promise<Response | void> => {
     
     if(req.body.developerId){
         const projectData: IProjectRequest = req.body
