@@ -1,6 +1,7 @@
 import { Request, Response} from 'express';
 import { client } from '../database';
 import { QueryConfig } from 'pg';
+import { IProjectResponse } from '../interfaces/projects.interfaces';
 
 
 const getProjects =async (req: Request, res: Response): Promise<Response> => {
@@ -21,7 +22,7 @@ const getProjects =async (req: Request, res: Response): Promise<Response> => {
         values: [id]
     }
 
-    const project = (await client.query(queryConfig)).rows[0]
+    const project: IProjectResponse = (await client.query(queryConfig)).rows[0]
 
     queryString = `
         SELECT
@@ -37,11 +38,18 @@ const getProjects =async (req: Request, res: Response): Promise<Response> => {
 
     const tech = (await client.query(queryConfig)).rows[0]
 
-    return res.json({
-        ...project,
+    return res.json([{
+        "projectId": project.id,
+        "projectName": project.name,
+        "projectDescription": project.description,
+        "projectEstimatedTime": project.estimatedTime,
+        "projectRepository": project.repository,
+        "projectStartDate": project.startDate,
+        "projectEndDate": project.endDate,
+        "projectDeveloperId": project.developerId,
         "technologyId": tech.id,
         "technologyName": tech.name
-    })
+    }])
 }
 
 export default getProjects
