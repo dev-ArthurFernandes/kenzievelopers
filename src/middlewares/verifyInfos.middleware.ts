@@ -3,7 +3,7 @@ import { client } from '../database';
 import { QueryConfig } from 'pg';
 
 
-const verifyInfos =async (req:Request, res: Response, next: NextFunction): Promise<void | Response> => {
+const verifyInfos = async (req:Request, res: Response, next: NextFunction): Promise<void | Response> => {
     
     const id: number = parseInt(req.params.id)
 
