@@ -21,5 +21,6 @@ interface ITechnologieRequest{
 export {
     IProjectRequest,
     IProjectResponse,
-    ITechnologieRequest
+    ITechnologieRequest,
+    technologies
 }

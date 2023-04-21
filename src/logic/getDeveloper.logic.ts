@@ -15,7 +15,7 @@ const getDeveloper = async (req:Request, res: Response): Promise<Response> => {
             devInfo."preferredOS"
         FROM 
             developers dev
-        FULL JOIN
+        LEFT JOIN
             developer_infos devInfo
                 ON devInfo."developerId" = dev.id
         WHERE
@@ -29,7 +29,13 @@ const getDeveloper = async (req:Request, res: Response): Promise<Response> => {
 
     const queryResult = (await client.query(queryConfig)).rows[0]
 
-    return res.json(queryResult)
+    return res.json({
+        developerId: queryResult.id,
+        developerName: queryResult.name,
+        developerEmail: queryResult.email,
+        developerInfoDeveloperSince: queryResult.developerSince,
+        developerInfoPreferredOS: queryResult.preferredOS
+    })
 }
 
 export default getDeveloper

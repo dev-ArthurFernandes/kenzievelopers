@@ -4,7 +4,10 @@ import {
     validateEmail,
     validateId,
     verifyInfos,
-    verifyDeveloper
+    verifyDeveloper,
+    verifyTech,
+    ensureTech,
+    ensuerOS
 } from "./middlewares";
 import {
     createDeveloper,
@@ -25,7 +28,7 @@ app.use(json())
 
 // developers
 app.post('/developers', validateEmail, createDeveloper)
-app.post('/developers/:id/infos', validateId, verifyInfos, createDeveloperInfo)
+app.post('/developers/:id/infos', validateId, verifyInfos, ensuerOS, createDeveloperInfo)
 
 app.get('/developers/:id', validateId, getDeveloper)
 
@@ -36,7 +39,7 @@ app.delete('/developers/:id', validateId, deleteDeveloper)
 
 // projects
 app.post('/projects', verifyDeveloper, createProject)
-app.post('/projects/:id/technologies', validateId, addProjectTechnologie)
+app.post('/projects/:id/technologies', validateId, ensureTech, verifyTech, addProjectTechnologie)
 
 app.get('/projects/:id', validateId, getProjects)
 

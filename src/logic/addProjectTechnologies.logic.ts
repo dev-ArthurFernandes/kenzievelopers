@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { client } from "../database";
 import { QueryConfig } from "pg";
 import format from "pg-format";
+import { IProjectResponse } from "../interfaces/projects.interfaces";
 
 
 const addProjectTechnologie =async (req:Request, res: Response): Promise<Response> => {
@@ -46,12 +47,18 @@ const addProjectTechnologie =async (req:Request, res: Response): Promise<Respons
             id = ${projectId}
     `
 
-    const project = (await client.query(queryString)).rows[0]
+    const project: IProjectResponse = (await client.query(queryString)).rows[0]
 
-    return res.json({
-        "tehcnologyId": techId,
+    return res.status(201).json({
+        "technologyId": techId,
         "technologyName": techName,
-        ...project
+        "projectId": project.id,
+        "projectName": project.name,
+        "projectDescription": project.description,
+        "projectEstimatedTime": project.estimatedTime,
+        "projectRepository": project.repository,
+        "projectStartDate": project.startDate,
+        "projectEndDate": project.endDate
     })
 }
 
